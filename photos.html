@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #7130ad;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-transform: uppercase;
+            height: auto;            
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 16px;
+            padding: 16px;
+        }
+
+        .gallery img {
+            width: 150px; /* Set a fixed width for the images */
+            height: 150px; /* Set a fixed height for the images */
+            object-fit: cover; /* Maintain aspect ratio and cover container */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #fff;
+            display: block;
+            background-color: #3498db;
+            transform: translateY(-50%);
+        }
+
+        .next-button {
+            right: 10%;
+        }
+
+        .prev-button {
+            left: 10%;
+        }
+
+        .nav-button:hover {
+            background-color: #2980b9;
+        }
+
+        #closeButton {
+            position: absolute;
+            top: 2px;
+            right: 90%;
+            padding: 10px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: x-large;
+            font-weight: bold;
+            display: block;
+            transition: 0.3s;
+            opacity: 1; 
+            color: #fff;
+            background-color: transparent;
+        }
+
+        #closeButton:hover{
+            opacity: 1; /* Set the opacity on hover */
+            color: #faf7f7;
+            background-color:black;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Photo Gallery</h1>
+
+    <div class="gallery">
+        <img src="Photos-001/photos (1).jpeg" alt="Image 1" onclick="openLightbox('Photos-001/photos (1).jpeg', 0)">
+        <img src="Photos-001/photos (1).jpg" alt="Image 2" onclick="openLightbox('Photos-001/photos (1).jpg', 1)">
+        <img src="Photos-001/photos (2).jpg" alt="" onclick="openLightbox('Photos-001/photos (2).jpg', 2)">
+        <img src="Photos-001/photos (3).jpg" alt="" onclick="openLightbox('Photos-001/photos (3).jpg', 3)">
+        <img src="Photos-001/photos (5).jpg" alt="" onclick="openLightbox('Photos-001/photos (5).jpg', 4)">
+        <img src="Photos-001/photos (4).jpeg" alt="" onclick="openLightbox('Photos-001/photos (4).jpeg', 5)">
+        <img src="Photos-001/photos (5).jpg" alt="" onclick="openLightbox('Photos-001/photos (5).jpg', 6)">
+        <img src="Photos-001/photos (4).jpg" alt="" onclick="openLightbox('Photos-001/photos (4).jpg', 7)">
+        <img src="Photos-001/photos (5).jpeg" alt="" onclick="openLightbox('Photos-001/photos (5).jpeg', 8)">
+        <img src="Photos-001/photos (6).jpeg" alt="" onclick="openLightbox('Photos-001/photos (6).jpeg', 9)">
+        <img src="Photos-001/photos (6).jpg" alt="" onclick="openLightbox('Photos-001/photos (6).jpg', 10)">
+        <img src="Photos-001/photos (7).jpg" alt="" onclick="openLightbox('Photos-001/photos (7).jpg', 11)">
+        <img src="Photos-001/photos (8).jpg" alt="" onclick="openLightbox('Photos-001/photos (8).jpg', 12)">
+        <img src="Photos-001/photos (9).jpg" alt="" onclick="openLightbox('Photos-001/photos (9).jpg', 13)">
+        <img src="Photos-001/1.jpeg " alt="" onclick="openLightbox('Photos-001/1.jpeg', 14)">
+        <img src="Photos-001/2.jpeg " alt="" onclick="openLightbox('Photos-001/2.jpeg', 15)">
+        <img src="Photos-001/3.jpg " alt="" onclick="openLightbox('Photos-001/3.jpg', 16)">
+        <img src="Photos-001/4.jpg " alt="" onclick="openLightbox('Photos-001/4.jpg', 17)">
+        <img src="Photos-001/5.jpeg " alt="" onclick="openLightbox('Photos-001/5.jpeg', 18)">
+        <img src="Photos-001/6.jpg " alt="" onclick="openLightbox('Photos-001/6.jpg', 19)">
+        <img src="Photos-001/7.jpg " alt="" onclick="openLightbox('Photos-001/7.jpg', 20)">
+        <img src="Photos-001/8.jpg " alt="" onclick="openLightbox('Photos-001/8.jpg', 15)">
+        <img src="Photos-001/9.jpg " alt="" onclick="openLightbox('Photos-001/9.jpg', 16)">
+        <img src="Photos-001/10.jpg " alt="" onclick="openLightbox('Photos-001/10.jpg', 17)">
+        <img src="Photos-001/11.png " alt="" onclick="openLightbox('Photos-001/11.png', 18)">
+        <img src="Photos-001/12.jpg " alt="" onclick="openLightbox('Photos-001/12.jpg', 19)">
+        <img src="Photos-001/13.jpg " alt="" onclick="openLightbox('Photos-001/13.jpg', 20)">
+        <img src="Photos-001/14.jpg " alt="" onclick="openLightbox('Photos-001/14.jpg', 21)">
+        <img src="Photos-001/15.jpg " alt="" onclick="openLightbox('Photos-001/15.jpg', 22)">
+        <img src="Photos-001/16.jpg " alt="" onclick="openLightbox('Photos-001/16.jpg', 23)">
+        <img src="Photos-001/17.jpg " alt="" onclick="openLightbox('Photos-001/17.jpg', 24)">
+
+
+    </div>
+
+    <div class="lightbox" onclick="closeLightbox()">
+        <img src="" alt="Full Size Image">
+        <button class="nav-button prev-button" onclick="showPrevImage()">&#9664; </button>
+        <button class="nav-button next-button" onclick="showNextImage()">&#9654;</button>
+        <button id="closeButton" onclick="removeImage()">&#8592;</button>
+
+    </div>
+
+    <script>
+        var images = [
+            'Photos-001/photos (1).jpeg',
+            'Photos-001/photos (1).jpg',
+            'Photos-001/photos (2).jpg',
+            'Photos-001/photos (3).jpg',
+            'Photos-001/photos (4).jpg',
+            'Photos-001/photos (4).jpeg',
+            'Photos-001/photos (5).jpg',
+            'Photos-001/photos (6).jpg',
+            'Photos-001/photos (5).jpeg',
+            'Photos-001/photos (6).jpeg',
+            'Photos-001/photos (6).jpg',
+            'Photos-001/photos (7).jpg',
+            'Photos-001/photos (8).jpg',
+            'Photos-001/photos (9).jpg',
+            'Photos-001/1.jpeg',
+            'Photos-001/2.jpeg',
+            'Photos-001/3.jpg',
+            'Photos-001/4.jpg',
+            'Photos-001/5.jpeg',
+            'Photos-001/6.jpg',
+            'Photos-001/7.jpg',
+            'Photos-001/8.jpg',
+            'Photos-001/9.jpg',
+            'Photos-001/10.jpg',
+            'Photos-001/11.png',
+            'Photos-001/12.jpg',
+            'Photos-001/13.jpg',
+            'Photos-001/14.jpg',
+            'Photos-001/15.jpg',
+            'Photos-001/16.jpg',
+            'Photos-001/17.jpg'
+        ];
+
+        var currentIndex = 0;
+
+        function openLightbox(imageSrc, index) {
+            var lightbox = document.querySelector('.lightbox');
+            var imageElement = lightbox.querySelector('img');
+            var closeButton = document.getElementById('closeButton');
+            // var removeImageButton = document.getElementById('removeImageButton');
+
+            imageElement.src = imageSrc;
+            lightbox.classList.add('show');
+            currentIndex = index;
+            toggleNavButtons();
+            closeButton.style.display = 'block';
+            removeImageButton.style.display = 'block';
+        }
+
+       
+
+        function showNextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateLightboxImage();
+        }
+
+        function showPrevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateLightboxImage();
+        }
+
+        function updateLightboxImage() {
+            var lightbox = document.querySelector('.lightbox');
+            var imageElement = lightbox.querySelector('img');
+            imageElement.src = images[currentIndex];
+        }
+
+        function toggleNavButtons() {
+            var lightbox = document.querySelector('.lightbox');
+            var nextButton = lightbox.querySelector('.next-button');
+            var prevButton = lightbox.querySelector('.prev-button');
+
+            if (lightbox.classList.contains('show')) {
+                nextButton.style.display = currentIndex === images.length - 1 ? 'none' : 'block';
+                prevButton.style.display = currentIndex === 0 ? 'none' : 'block';
+            } else {
+                nextButton.style.display = 'none';
+                prevButton.style.display = 'none';
+            }
+        }
+
+        function removeImage() {
+            // Implement the logic to remove the image here
+            // You may want to update the 'images' array and re-render the gallery
+            var lightbox = document.querySelector('.lightbox');
+            lightbox.classList.remove('show');
+            closeLightbox();
+        }
+    </script>
+</body>
+</html>
