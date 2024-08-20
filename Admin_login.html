@@ -86,18 +86,17 @@
 	</style>
 </head>
 <body>
-	<div class="container">
-		<h1 class="label">User Login</h1>
-		<form class="login_form" method="post" onsubmit=" return validated()">
-			<div class="font">Email or Phone</div>
-			<input type="email" name="email">
-			<div id="email_error">Please fill up your Email or Phone</div>
-			<div class="font font2">Password</div>
-			<input type="password" name="password">
-			<div id="pass_error">Please fill up your Password</div>
-			<button type="submit">Login</button>
-		</form>
-	</div>	
+	<form name="form">
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email">
+        <div id="email_error">Invalid email.</div>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        <div id="pass_error">Invalid password.</div>
+        <br>
+        <button type="button" onclick="validated()">Submit</button>
+    </form>
 	<script>
 	var email = document.forms['form']['email'];
         var password = document.forms['form']['password'];
@@ -109,7 +108,7 @@
         password.addEventListener('textInput', pass_Verify);
 
         const defaultEmail = "sunarsherbahadur9@gmail.com";
-        const defaultPassword = "Sijan02143";
+        const defaultPassword = "Sijan946781@#%";
 
         function validated() {
             // Check if email matches default email
@@ -130,7 +129,7 @@
             }
             // Redirect to admin.html if email and password match
             window.location.href = "admin.html";
-            return false; // Prevent form submission (optional)
+            return false;
         }
 
         function email_Verify() {
