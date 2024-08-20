@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <style>
+        .questionsList {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+            gap: 20px; /* Space between columns */
+        }
+        .question-answer {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .question {
+            font-weight: bold;
+        }
+        .answer {
+            margin-top: 5px;
+            color: #555;
+        }
+        @media (max-width: 768px) {
+            .questionsList {
+                grid-template-columns: 1fr; /* Single column layout on small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="questionsList" id="QnList">
+        <!-- Questions and answers will be inserted here -->
+    </div>
+
+    <script>
+        const questions = [
+        { question: "नेपालको राजधानी के हो?", answer: "काठमाडौँ" },
+    { question: "सगरमाथाको उचाइ कति छ?", answer: "८,८४८ मिटर" },
+    { question: "नेपालको राष्ट्रिय जनावर के हो?", answer: "गाई" },
+    { question: "नेपालको पहिलो राजा को हुन्?", answer: "राजा पृथ्वीनारायण शाह" },
+    { question: "नेपालमा कूल कति प्रदेश छन्?", answer: "७" },
+    { question: "नेपालको सबैभन्दा ठूलो ताल कुन हो?", answer: "रारा ताल" },
+    { question: "नेपालको राष्ट्रिय फूल के हो?", answer: "लालीगुराँस" },
+    { question: "नेपालको संविधान कहिले जारी भएको हो?", answer: "२०७२ साल असोज ३ गते" },
+    { question: "नेपालको पहिलो राष्ट्रपति को हुन्?", answer: "डा. रामवरण यादव" },
+    { question: "नेपालको राष्ट्रिय खेल के हो?", answer: "भलिबल" },
+    { question: "नेपालको राष्ट्रिय पक्षी के हो?", answer: "डाँफे" },
+    { question: "नेपालको सबैभन्दा लामो नदी कुन हो?", answer: "घुम्ती" },
+    { question: "नेपालमा कूल कति जिल्ला छन्?", answer: "७७" },
+    { question: "नेपालको पहिलो प्रधानमन्त्री को हुन्?", answer: "भिमसेन थापा" },
+    { question: "नेपालको राष्ट्रिय गीत के हो?", answer: "सयौं थुँगा फूलका" },
+    { question: "नेपालको सबैभन्दा अग्लो पर्वत कुन हो?", answer: "सगरमाथा" },
+    { question: "नेपालको पुरानो नाम के थियो?", answer: "नेपाल मण्डल" },
+    { question: "नेपालमा कूल कति जातजाति छन्?", answer: "१२५" },
+    { question: "नेपालको सबैभन्दा ठूलो जिल्ला कुन हो?", answer: "डोल्पा" },
+    { question: "नेपालको सबैभन्दा सानो जिल्ला कुन हो?", answer: "भक्तपुर" },
+    { question: "नेपालको पहिलो नेपाली उपग्रहको नाम के हो?", answer: "नेपालीस्याट-१" },
+    { question: "नेपालको पहिलो महिला राष्ट्रपति को हुन्?", answer: "विद्यादेवी भण्डारी" },
+    { question: "नेपालको पुरानो पत्रिका कुन हो?", answer: "गोरखापत्र" },
+    { question: "नेपालको राष्ट्रिय गानका लेखक को हुन्?", answer: "प्रदीपकुमार राई (व्याकुल माइलु)" },
+    { question: "नेपालको सबैभन्दा ठूलो वन कुन हो?", answer: "चितवन राष्ट्रिय निकुञ्ज" },
+    { question: "नेपालको पहिलो महिला प्रधानमन्त्री को हुन्?", answer: "भएका छैनन्" },
+    { question: "नेपालको पहिलो अन्तरिक्ष यात्री को हुन्?", answer: "राजेन्द्रकुमार पोखरेल" },
+    { question: "नेपालको पहिलो एयरपोर्ट कुन हो?", answer: "त्रिभुवन अन्तर्राष्ट्रिय विमानस्थल" },
+    { question: "नेपालको पहिलो रेल सेवा कहिले सुरु भएको हो?", answer: "२००४ साल" },
+    { question: "नेपालको सबैभन्दा ठूलो धार्मिक स्थल कुन हो?", answer: "पशुपतिनाथ मन्दिर" },
+    { question: "नेपालको पहिलो विश्वविद्यालय कुन हो?", answer: "त्रिभुवन विश्वविद्यालय" },
+    { question: "नेपालको पुरानो शहर कुन हो?", answer: "भक्तपुर" },
+    { question: "नेपालको पहिलो महिला पाइलट को हुन्?", answer: "प्रभा देसाई" },
+    { question: "नेपालको पहिलो आधुनिक कवि को हुन्?", answer: "महाकवि लक्ष्मीप्रसाद देवकोटा" },
+    { question: "नेपालको सबैभन्दा लामो पुल कुन हो?", answer: "कोशी पुल" },
+    { question: "नेपालको सबैभन्दा अग्लो भवन कुन हो?", answer: "धरहरा" },
+    { question: "नेपालको सबैभन्दा पुरानो मन्दिर कुन हो?", answer: "चाँगुनारायण मन्दिर" },
+    { question: "नेपालको पहिलो फिल्म कुन हो?", answer: "सत्य हरिश्चन्द्र" },
+    { question: "नेपालको पुरानो दरबार कुन हो?", answer: "हनुमानढोका दरबार" },
+    { question: "नेपालमा कूल कति हिमाल छन्?", answer: "३,२४०" },
+    { question: "नेपालको सबैभन्दा ठूलो पुस्तकालय कुन हो?", answer: "काठमाडौँ पुस्तकालय" },
+    { question: "नेपालको सबैभन्दा पुरानो स्कूल कुन हो?", answer: "दरबार हाई स्कूल" },
+    { question: "नेपालको पहिलो हवाई उडान कहिले भएको हो?", answer: "१९५०" },
+    { question: "नेपालको पहिलो राष्ट्रिय उद्यान कुन हो?", answer: "चितवन राष्ट्रिय निकुञ्ज" },
+    { question: "नेपालको पहिलो महिला सांसद को हुन्?", answer: "धनसरी देउवा" },
+    { question: "नेपालको सबैभन्दा ठूलो पर्व कुन हो?", answer: "दशैं" },
+    { question: "नेपालको राष्ट्रिय मुद्रा के हो?", answer: "नेपाली रूपैयाँ" },
+    { question: "नेपालको पहिलो अन्तर्राष्ट्रिय क्रिकेट मैदान कुन हो?", answer: "कीर्तिपुर मैदान" },
+    { question: "नेपालको पहिलो टेलिभिजन च्यानल कुन हो?", answer: "नेपाल टेलिभिजन" },
+    { question: "नेपालको राष्ट्रिय नदी कुन हो?", answer: "कर्णाली" },
+    { question: "नेपालको सबैभन्दा पुरानो संग्रहालय कुन हो?", answer: "राष्ट्रिय संग्रहालय" },
+    { question: "नेपालको पहिलो औद्योगिक क्षेत्र कुन हो?", answer: "वीरगन्ज औद्योगिक क्षेत्र" },
+    { question: "नेपालको पहिलो पुस्तक कसले लेखेका हुन्?", answer: "भानुभक्त आचार्य" },
+    { question: "नेपालको सबैभन्दा अग्लो झरना कुन हो?", answer: "रुप्से झरना" },
+    { question: "नेपालको पहिलो चलचित्र निर्देशक को हुन्?", answer: "हिम्मतबहादुर राणा" },
+    { question: "नेपालको पहिलो महिला एभरेस्ट आरोही को हुन्?", answer: "पासाङ ल्हामु शेर्पा" },
+    { question: "नेपालको पहिलो बैंक कुन हो?", answer: "नेपाल बैंक लिमिटेड" },
+    { question: "नेपालको पहिलो अन्तर्राष्ट्रिय हवाई मार्ग कुन हो?", answer: "काठमाडौँ-दिल्ली" },
+    { question: "नेपालको सबैभन्दा पुरानो अस्पताल कुन हो?", answer: "वीर अस्पताल" },
+    { question: "नेपालको पहिलो विज्ञान केन्द्र कुन हो?", answer: "नेपाल विज्ञान तथा प्रविधि प्रतिष्ठान (NAST)" },
+    { question: "नेपालको सबैभन्दा ठूलो चिडियाखाना कुन हो?", answer: "जावलाखेल चिडियाखाना" },
+    { question: "नेपालको पहिलो प्रिन्टिङ प्रेस कुन हो?", answer: "गोपीकृष्ण प्रिन्टिङ प्रेस" },
+    { question: "नेपालको पहिलो महिला मेयर को हुन्?", answer: "कमला दाहाल" },
+    { question: "नेपालको पहिलो सिँचाइ परियोजना कुन हो?", answer: "सागर सिँचाइ परियोजना" },
+    { question: "नेपालको सबैभन्दा पुरानो साहित्यिक पुरस्कार के हो?", answer: "मदन पुरस्कार" },
+    { question: "नेपालको पहिलो संविधान सभा कहिले गठन भएको थियो?", answer: "२०६४ साल" },
+    { question: "नेपालको सबैभन्दा पुरानो विश्वविद्यालय कुन हो?", answer: "त्रिभुवन विश्वविद्यालय" },
+    { question: "नेपालको पहिलो राष्ट्रिय खेलकुद पुरस्कार के हो?", answer: "राजपत्रित खेलाडी पुरस्कार" },
+    { question: "नेपालको पहिलो जलविद्युत आयोजना कुन हो?", answer: "फर्पिङ जलविद्युत आयोजना" },
+    { question: "नेपालको सबैभन्दा पुरानो सडक कुन हो?", answer: "त्रिभुवन राजपथ" },
+    { question: "नेपालको पहिलो महिलाले गरेको ट्रेकिङ कुन हो?", answer: "पथिभरा ट्रेक" },
+    { question: "नेपालको पहिलो महिला गृहमन्त्री को हुन्?", answer: "बिमला राई पौडेल" },
+    { question: "नेपालको सबैभन्दा ठूलो बजेट कुन वर्षमा थियो?", answer: "२०७८/७९" },
+    { question: "नेपालको पहिलो टेलिफोन सेवा कहिले सुरु भएको हो?", answer: "१९७५" },
+    { question: "नेपालको सबैभन्दा लामो राजमार्ग कुन हो?", answer: "महिन्द्र राजमार्ग" },
+    { question: "नेपालको पहिलो रेडियो स्टेशन कुन हो?", answer: "रेडियो नेपाल" },
+    { question: "नेपालको पहिलो महिला पत्रकार को हुन्?", answer: "भारती शाह" },
+    { question: "नेपालको पहिलो इन्टरनेट सेवा प्रदायक कुन हो?", answer: "Mercantile Communication" },
+    { question: "नेपालको पहिलो मोबाइल सेवा प्रदायक कुन हो?", answer: "NTC (नेपाल टेलिकम)" }
+    ];
+
+    const questionsList = document.getElementById('QnList');
+
+    questions.forEach((q, index) => {
+        const questionAnswerDiv = document.createElement('div');
+        questionAnswerDiv.classList.add('question-answer');
+
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question');
+        questionDiv.textContent = `${index + 1}. ${q.question}`; // Adding question number
+
+        const answerDiv = document.createElement('div');
+        answerDiv.classList.add('answer');
+        answerDiv.textContent = q.answer;
+
+        questionAnswerDiv.appendChild(questionDiv);
+        questionAnswerDiv.appendChild(answerDiv);
+
+        questionsList.appendChild(questionAnswerDiv);
+    });
+    </script>
+</body>
+</html>
