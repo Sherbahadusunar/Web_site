@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Admin Login</title>
-	<link rel="stylesheet" href="style2.css">
+	<title>Validated Login Form</title>
 	<style>
 		*{
 			padding: 0;
@@ -27,7 +26,7 @@
 		}
 		.label{
 			padding: 20px 130px;
-			font-size: 35px;
+			font-size: 30px;
 			font-weight: bold;
 			color: #130f40;
 		}
@@ -36,6 +35,7 @@
 		}
 		.login_form .font{
 			font-size: 18px;
+			font-weight: bold;
 			color: #130f40;
 			margin: 5px 0;
 		}
@@ -49,6 +49,7 @@
 		}
 		.login_form .font2{
 			margin-top: 30px;
+			font-weight: bold;
 		}
 		.login_form button{
 			margin: 45px 0 30px 0;
@@ -80,93 +81,77 @@
 			border: 1px solid #EF9A9A;
 			display: none;
 		}
-		#email_error, #pass_error {
-            color: red;
-            display: none;
-        }	
+		
+		
 		
 	</style>
 </head>
-<body>
+<body>	
 	<div class="container">
-	<h1 class="label">Admin Login</h1>
-	<form name="form" id="loginForm">
-        <label for="email">Email:</label>
-        <input type="text" name="email" id="email">
-        <div id="email_error">Invalid email.</div>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password">
-        <div id="pass_error">Invalid password.</div>
-        <br>
-        <button type="submit">Submit</button>
-    </form>
-	</div>	
- 
- <script>
-        var email = document.forms['form']['email'];
-        var password = document.forms['form']['password'];
+		<h1 class="label">Admin Login</h1>
+		<form class="login_form" name="form" id="loginForm" method="post">
+			<label class="font" for="email">Email:</label>
+			<input type="email" name="email" id="email">
+			<div id="email_error">Invalid email.</div>
+			<br>
+			<label class="font font2" for="password">Password:</label>
+			<input type="password" name="password" id="password">
+			<div id="pass_error">Invalid password.</div>
+			<br>
+			<button type="submit">Submit</button>
+		</form>
+		</div>	
 
-        var email_error = document.getElementById('email_error');
-        var pass_error = document.getElementById('pass_error');
+	<script>
+			//Validtion Code For Inputs
 
-        email.addEventListener('textInput', email_Verify);
-        password.addEventListener('textInput', pass_Verify);
+	var email = document.forms['form']['email'];
+	var password = document.forms['form']['password'];
 
-        const defaultEmail = "sunarsherbahadur9@gmail.com";
-        const defaultPassword = "Sijan946781@#%";
+	var email_error = document.getElementById('email_error');
+	var pass_error = document.getElementById('pass_error');
 
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the form from submitting
+	email.addEventListener('textInput', email_Verify);
+	password.addEventListener('textInput', pass_Verify);
 
-            if (validated()) {
-                window.location.href = "admin.html"; // Redirect if validation passes
-            }
-        });
+	const defaultEmail = "sunarsherbahadur9@gmail.com";
+	const defaultPassword = "Sijan02143";
 
-        function validated() {
-            let valid = true;
+	function validated() {
+		// Check if email matches default email
+		if (email.value !== defaultEmail) {
+			email.style.border = "1px solid red";
+			email_error.textContent = "Email does not match the default email.";
+			email_error.style.display = "block";
+			email.focus();
+			return false;
+		}
+		// Check if password matches default password
+		if (password.value !== defaultPassword) {
+			password.style.border = "1px solid red";
+			pass_error.textContent = "Password does not match the default password.";
+			pass_error.style.display = "block";
+			password.focus();
+			return false;
+		}
+		return true;
+	}
 
-            if (email.value !== defaultEmail) {
-                email.style.border = "1px solid red";
-                email_error.textContent = "Email does not match the default email.";
-                email_error.style.display = "block";
-                email.focus();
-                valid = false;
-            } else {
-                email.style.border = "1px solid silver";
-                email_error.style.display = "none";
-            }
+	function email_Verify() {
+		if (email.value === defaultEmail) {
+			email.style.border = "1px solid silver";
+			email_error.style.display = "none";
+			return true;
+		}
+	}
 
-            if (password.value !== defaultPassword) {
-                password.style.border = "1px solid red";
-                pass_error.textContent = "Password does not match the default password.";
-                pass_error.style.display = "block";
-                password.focus();
-                valid = false;
-            } else {
-                password.style.border = "1px solid silver";
-                pass_error.style.display = "none";
-            }
-
-            return valid;
-        }
-
-        function email_Verify() {
-            if (email.value === defaultEmail) {
-                email.style.border = "1px solid silver";
-                email_error.style.display = "none";
-                return true;
-            }
-        }
-
-        function pass_Verify() {
-            if (password.value === defaultPassword) {
-                password.style.border = "1px solid silver";
-                pass_error.style.display = "none";
-                return true;
-            }
-        }
-    </script>
+	function pass_Verify() {
+		if (password.value === defaultPassword) {
+			password.style.border = "1px solid silver";
+			pass_error.style.display = "none";
+			return true;
+		}
+	}
+	</script>
 </body>
 </html>
