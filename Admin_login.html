@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Validated Login Form</title>
+	<title>Admin Login</title>
 	<link rel="stylesheet" href="style2.css">
 	<style>
 		*{
@@ -88,7 +88,9 @@
 	</style>
 </head>
 <body>
-   <form name="form" id="loginForm">
+	<div class="container">
+	<h1 class="label">Admin Login</h1>
+	<form name="form" id="loginForm">
         <label for="email">Email:</label>
         <input type="text" name="email" id="email">
         <div id="email_error">Invalid email.</div>
@@ -99,6 +101,8 @@
         <br>
         <button type="submit">Submit</button>
     </form>
+	</div>	
+ 
  <script>
         var email = document.forms['form']['email'];
         var password = document.forms['form']['password'];
