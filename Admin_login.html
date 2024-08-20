@@ -88,7 +88,7 @@
 <body>
 	<div class="container">
 		<h1 class="label">User Login</h1>
-		<form class="login_form" action="admin.html" method="post" name="form" onsubmit="return validated()">
+		<form class="login_form"  onsubmit="return validated()">
 			<div class="font">Email or Phone</div>
 			<input autocomplete="off" type="text" name="email">
 			<div id="email_error">Please fill up your Email or Phone</div>
@@ -99,55 +99,55 @@
 		</form>
 	</div>	
 	<script>
-			//Validtion Code For Inputs
-
 	var email = document.forms['form']['email'];
-	var password = document.forms['form']['password'];
+        var password = document.forms['form']['password'];
 
-	var email_error = document.getElementById('email_error');
-	var pass_error = document.getElementById('pass_error');
+        var email_error = document.getElementById('email_error');
+        var pass_error = document.getElementById('pass_error');
 
-	email.addEventListener('textInput', email_Verify);
-	password.addEventListener('textInput', pass_Verify);
+        email.addEventListener('textInput', email_Verify);
+        password.addEventListener('textInput', pass_Verify);
 
-	const defaultEmail = "sunarsherbahadur9@gmail.com";
-	const defaultPassword = "Sijan946781@#%";
+        const defaultEmail = "sunarsherbahadur9@gmail.com";
+        const defaultPassword = "Sijan946781@#%";
 
-	function validated() {
-		// Check if email matches default email
-		if (email.value !== defaultEmail) {
-			email.style.border = "1px solid red";
-			email_error.textContent = "Email does not match !";
-			email_error.style.display = "block";
-			email.focus();
-			return false;
-		}
-		// Check if password matches default password
-		if (password.value !== defaultPassword) {
-			password.style.border = "1px solid red";
-			pass_error.textContent = "Password does not match !";
-			pass_error.style.display = "block";
-			password.focus();
-			return false;
-		}
-		return true;
-	}
+        function validated() {
+            // Check if email matches default email
+            if (email.value !== defaultEmail) {
+                email.style.border = "1px solid red";
+                email_error.textContent = "Email does not match the default email.";
+                email_error.style.display = "block";
+                email.focus();
+                return false;
+            }
+            // Check if password matches default password
+            if (password.value !== defaultPassword) {
+                password.style.border = "1px solid red";
+                pass_error.textContent = "Password does not match the default password.";
+                pass_error.style.display = "block";
+                password.focus();
+                return false;
+            }
+            // Redirect to admin.html if email and password match
+            window.location.href = "admin.html";
+            return false; // Prevent form submission (optional)
+        }
 
-	function email_Verify() {
-		if (email.value === defaultEmail) {
-			email.style.border = "1px solid silver";
-			email_error.style.display = "none";
-			return true;
-		}
-	}
+        function email_Verify() {
+            if (email.value === defaultEmail) {
+                email.style.border = "1px solid silver";
+                email_error.style.display = "none";
+                return true;
+            }
+        }
 
-	function pass_Verify() {
-		if (password.value === defaultPassword) {
-			password.style.border = "1px solid silver";
-			pass_error.style.display = "none";
-			return true;
-		}
-	}
+        function pass_Verify() {
+            if (password.value === defaultPassword) {
+                password.style.border = "1px solid silver";
+                pass_error.style.display = "none";
+                return true;
+            }
+        }
 	</script>
 </body>
 </html>
