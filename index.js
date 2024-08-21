@@ -121,9 +121,9 @@ function initializeGrid() {
 }
 
 
-setTimeout(function () {
-    gameTime.play();
-});
+// setTimeout(function () {
+//     gameTime.play();
+// });
 
 document.getElementById("btnRight").addEventListener("click", rightAnswer);
 document.getElementById("btnShow").addEventListener("click", showAnswer);
